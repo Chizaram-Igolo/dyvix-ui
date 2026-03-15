@@ -1,1 +1,51 @@
-# dyvix-ui
+<h1 align="center">
+  <img width="100" height="100" alt="Dyvix logo" src="./logo.png" />
+  <br />
+  Dyvix UI
+</h1>
+<h4 align="center">
+  Dyvix is an open source, modern, config-driven, animated component UI library. Beautiful by default, customizable by design.
+</h4>
+<p align="center">
+  <img src="https://img.shields.io/npm/v/dyvix-ui?color=bf5af2&style=flat-square" />
+  <img src="https://img.shields.io/npm/l/dyvix-ui?color=0ea5e9&style=flat-square" />
+  <img src="https://img.shields.io/github/stars/younisdev/dyvix-ui?color=ff6ac1&style=flat-square" />
+</p>
+
+```bash
+# React
+npm i dyvix-ui
+```
+
+### Basic usage
+```jsx
+import { Modal } from 'dyvix-ui'
+
+function ModalExample()
+{
+
+  return(
+        <Modal
+          title="Register"
+          type="form"
+          animation="bubble"
+          Id="register-modal"
+          Class="modal"
+          elements={[
+            { type: "text", placeholder: ["First Name", "Last Name"], id: "name", className: "ex-text", amount: 2 },
+            { type: "email", placeholder: "Email", id: "email", className: "ex-text", amount: 1 },
+            { type: "password", placeholder: "Password", id: "password", className: "ex-text", amount: 1 },
+          ]}
+          onSubmit={(data) => console.log(data)}
+      />
+    )
+}
+```
+
+## Contributing
+
+Feel free to open meaningful issues and prs.
+
+## Note
+
+This project is still in early alpha expect some bugs and unfinished code.
