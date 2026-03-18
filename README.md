@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="100" height="100" alt="Dyvix logo" src="./logo.png" />
+  <img width="100" height="100" alt="Dyvix logo" src="https://raw.githubusercontent.com/younisdev/dyvix-ui/main/logo.png" />
   <br />
   Dyvix UI
 </h1>
