@@ -28,7 +28,6 @@ function Modal({title, type, elements, animation, Id, Class, onSubmit})
     <>
       <div className={Class} id={Id}>
         <h3 id="modal-header">{title}</h3>
-    
         {fields.map((field, i) => {
           const elementDef = elementsData.find(e => e.element === field.type) || elementsData.find(e => e["inherited-element"]?.includes(field.type));
           const Tag = elementDef.is_custom? componentsMap[elementDef.tag] : elementDef.tag;
@@ -40,13 +39,14 @@ function Modal({title, type, elements, animation, Id, Class, onSubmit})
                   const Tagprobs = {
                     className: elementDef["default-class"],
                     role: elementDef.aria.role,
+                    name: name,
                     ...(elementDef["supports-placeholder"] && ({placeholder: field.placeholder[j]})),
-                    ...(elementDef["tag-type"] && ({ type: elementDef["tag-type"] }))
+                    ...(elementDef["supports_type"] && ({type: field.type})),
+                    ...(elementDef["supports_autocomplete"] && ({autocomplete: field.type === "password" ? "current-password": "on"}))
                   }
                   return <Tag key={j} {...Tagprobs} onChange={(e) => handleInputChange(name, e.target.value)} />
               })
               }
-              
             </div>
           )
         })}

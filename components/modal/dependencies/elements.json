@@ -11,6 +11,8 @@
          },
         "inherited-element": ["email", "password", "search", "url", "tel"],
         "supports-placeholder": true,
+        "supports_type": true,
+        "supports_autocomplete": true,
         "is_custom": false,
         "requires-options": false,
         "r-variant": true
@@ -25,6 +27,8 @@
             "aria-label": ""
         },
         "supports-placeholder": true,
+        "supports_type": false,
+        "supports_autocomplete": false,
         "is_custom": true,
         "requires-options": true,
         "r-variant": true
