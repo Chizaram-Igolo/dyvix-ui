@@ -36,7 +36,7 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
   const rowOffset = elements.length / 4;
   const dynamicHeight = rowOffset > 1 ? `${30 + (rowOffset - 1) * 15}rem` : "30rem";
   const dynamicWidth = currentTheme.radiused || rowOffset > 1  ? `${30 + rowOffset * 10}rem` : "30rem";
-  console.log(currentAnimation.from)
+
   useGSAP(()=> {
     gsap.fromTo(modalRef.current, currentAnimation.from, {
       ...currentAnimation.to,
