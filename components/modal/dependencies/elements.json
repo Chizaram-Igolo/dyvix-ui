@@ -12,7 +12,7 @@
         "inherited-element": ["email", "password", "search", "url", "tel"],
         "inherit-overrides": {
             "search": {
-            "aria": { "role": "searchbox" }
+                "aria": { "role": "searchbox" }
             },
             "password": {
                 "aria": { "aria-label": "password" }
