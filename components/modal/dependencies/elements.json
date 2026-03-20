@@ -10,6 +10,14 @@
             "aria-label": ""
          },
         "inherited-element": ["email", "password", "search", "url", "tel"],
+        "inherit-overrides": {
+            "search": {
+                "aria": { "role": "searchbox" }
+            },
+            "password": {
+                "aria": { "aria-label": "password" }
+            }
+        },
         "supports-placeholder": true,
         "supports_type": true,
         "supports_autocomplete": true,
