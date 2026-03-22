@@ -58,10 +58,32 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
             <div className="grouped-elements" key={field.id || i} >
               {Array.from({ length: field.amount }, (_, j) => {
                   const name = field.name[j]
+                  
+                  // Spread aria props safely to avoid runtime errors if elementDef.aria is missing or null
+                  let ariaProps = elementDef.aria ? { ...elementDef.aria } : {};
+                  
+                  // Allow field-specific aria overrides for inherited elements (e.g., search gets role="searchbox")
+                  const overrideConfig = elementDef["inherit-overrides"]?.[field.type];
+                  if (overrideConfig && overrideConfig.aria) {
+                    ariaProps = { ...ariaProps, ...overrideConfig.aria };
+                  }
+                  
+                  // Build aria attributes object with defensive checks for undefined/null values
+                  const ariaAttributes = {};
+                  if (ariaProps.role !== undefined && ariaProps.role !== null) {
+                    ariaAttributes.role = ariaProps.role;
+                  }
+                  if (ariaProps["aria-label"] !== undefined && ariaProps["aria-label"] !== null) {
+                    ariaAttributes["aria-label"] = ariaProps["aria-label"];
+                  }
+                  if (ariaProps["aria-required"] !== undefined && ariaProps["aria-required"] !== null) {
+                    ariaAttributes["aria-required"] = ariaProps["aria-required"];
+                  }
+
                   const Tagprobs = {
                     className: elementDef["default-class"],
-                    role: elementDef.aria.role,
                     name: name,                    
+                    ...ariaAttributes,
                     ...(elementDef["supports-placeholder"] && ({placeholder: field.placeholder[j]})),
                     ...(elementDef["supports_type"] && ({type: field.type})),
                     ...(elementDef["supports_autocomplete"] && ({autoComplete: field.type === "password" ? "current-password": "on"}))
