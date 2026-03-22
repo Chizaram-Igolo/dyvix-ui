@@ -38,16 +38,13 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
   const dynamicWidth = currentTheme.radiused || rowOffset > 1  ? `${30 + rowOffset * 10}rem` : "30rem";
 
   useGSAP(()=> {
-    console.log("Animation Target:", currentAnimation);
-    console.log("From Vars:", currentAnimation?.from);
-    console.log("To Vars:", currentAnimation?.to);
-    
     gsap.fromTo(modalRef.current, currentAnimation.from, {
       ...currentAnimation.to,
       duration: currentAnimation["default-duration"],
       ease: currentAnimation.ease
     });
   }, [currentAnimation]);
+
   return (
     <div ref={modalRef} className="dyvix-modal-wrapper" >
       <div className={serilaizedClass} id={Id} ref={modalRef} style={{height: dynamicHeight, width: dynamicWidth}}>
@@ -109,20 +106,20 @@ function SerializeData(title, type, elements, theme, animation, Id, Class, onSub
 
     if(validator.status !== 1)
     {
-      console.error(validator.error)
-      return null
+      console.error(validator.error);
+      return null;
     }
 
-    const normalizedElements = elements.map(ele => ({...defaultElement, ...ele}));
-    const eleValidator =  validateElements(normalizedElements);
+    const normalizedElements = normalizeElements(elements.map(ele => ({...defaultElement, ...ele})));
+    const eleValidator = validateElements(normalizedElements);
     
     if(eleValidator.status !== 1)
     {
-      console.error(eleValidator.error)
-      return null
+      console.error(eleValidator.error);
+      return null;
     }
 
-    return normalizeElements(normalizedElements); 
+    return normalizedElements; 
 }
 function ValidateInput(title, type, elements, theme, animation, Id, Class, onSubmit)
 {
@@ -175,26 +172,59 @@ function validateElements(elements)
     }
     else
     {
-      if(!(typeof element.placeholder === "string" || (Array.isArray(element.placeholder) && element.placeholder.length === 1)))
+      if(!(Array.isArray(element.placeholder) && element.placeholder.length === 1))
       {
         return {status: -1, error: "Element placeholder should be a string or an array of length 1."};
       }
-      if(!(typeof element.name === "string" || (Array.isArray(element.name) && element.name.length === 1)))
+      if(!(Array.isArray(element.name) && element.name.length === 1))
       {
         return {status: -1, error: "Element name should be a string or an array of length 1."};
       }
     }
   };
+  console.log(elements)
+  const isDuplicateName = checkDuplicates(elements, "name");
+  const isDuplicateId = checkDuplicates(elements, "id");
+
+  if (isDuplicateName?.status === -1)
+  {
+    return isDuplicateName;
+  }
+  if (isDuplicateId?.status === -1)
+  {
+    return isDuplicateId;
+  }
 
   return  {status: 1};
 }
-
 function normalizeElements(elements)
 {
   return elements.map(ele => ({
     ...ele,
     placeholder: typeof ele.placeholder === "string" ? [ele.placeholder] : ele.placeholder,
-    name: typeof ele.name === "string" ? [ele.name] : ele.name
+    name: typeof ele.name === "string" ? [ele.name] : ele.name,
+    id: typeof ele.id === "string" ? [ele.id] : ele.id,
   }));
+}
+function checkDuplicates(elements, field)
+{
+  let found = new Set();
+
+  for (const element of elements) 
+  {
+    const currentFields = element[field];
+
+    for(const key in currentFields)
+    {
+      if(found.has(currentFields[key]))
+      {
+        return {status: -1, error: `Element ${field} should be unique.`};
+      }
+
+      found.add(currentFields[key])
+    }
+  }
+
+  return { status: 1 };
 }
 export default Modal;
