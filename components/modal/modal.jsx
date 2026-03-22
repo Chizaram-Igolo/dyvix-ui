@@ -10,7 +10,7 @@ import gsap from "gsap";
 
 const vaildThemes = themesData.map(e => e.theme);
 const validAnimations = animationsData.map(e => e.animation);
-const defaultElement = {type: "!", placeholder: ["!"], id: "!",   className: "!", amount: 1 };
+const defaultElement = {type: "!/", placeholder: ["!/"], id: "!/",   className: "!/", amount: 1 };
 const supportedTypes = ["text", "select", "email", "password", "search", "url", "tel"]
 const componentsMap = {"SelectEngine": SelectEngine};
 
@@ -57,7 +57,7 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
             <div className="grouped-elements" key={field.id || i} >
               {Array.from({ length: field.amount }, (_, j) => {
                   const name = field.name[j]
-                  
+                  const id = field.id[j]
                   // Spread aria props safely to avoid runtime errors if elementDef.aria is missing or null
                   let ariaProps = elementDef.aria ? { ...elementDef.aria } : {};
                   // Allow field-specific aria overrides for inherited elements (e.g., search gets role="searchbox")
@@ -82,8 +82,9 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
 
                   const Tagprobs = {
                     className: elementDef["default-class"],
-                    name: name,                    
+                    name: name,
                     ...ariaAttributes,
+                    ...((id && id !== "!/") && ({id: id})),
                     ...(elementDef["supports-placeholder"] && ({placeholder: field.placeholder[j]})),
                     ...(elementDef["supports_type"] && ({type: field.type})),
                     ...(elementDef["supports_autocomplete"] && ({autoComplete: field.type === "password" ? "current-password": "on"}))
@@ -182,7 +183,7 @@ function validateElements(elements)
       }
     }
   };
-  console.log(elements)
+  console.log(elements);
   const isDuplicateName = checkDuplicates(elements, "name");
   const isDuplicateId = checkDuplicates(elements, "id");
 
@@ -221,7 +222,7 @@ function checkDuplicates(elements, field)
         return {status: -1, error: `Element ${field} should be unique.`};
       }
 
-      found.add(currentFields[key])
+      found.add(currentFields[key]);
     }
   }
 
