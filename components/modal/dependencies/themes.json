@@ -2,31 +2,31 @@
     {
         "theme": "Singularity",
         "class": "dyvix-modal-lens",
-        "default-amination": "fade",
+        "default-animation": "bubble",
         "radiused": true
     },
     {
         "theme": "Industrial",
         "class": "dyvix-modal-industrial",
-        "default-amination": "bubble",
+        "default-animation": "fade",
         "radiused": false
     },
     {
         "theme": "Ember",
         "class": "dyvix-modal-ember",
-        "default-amination": "fade",
+        "default-animation": "glitch",
         "radiused": false
     },
     {
         "theme": "Frost",
         "class": "dyvix-modal-frost",
-        "default-amination": "fade",
+        "default-animation": "unfold",
         "radiused": false
     },
     {
         "theme": "Blade",
         "class": "dyvix-modal-blade",
-        "default-amination": "fade",
+        "default-animation": "zoom",
         "radiused": false
     }
 ]

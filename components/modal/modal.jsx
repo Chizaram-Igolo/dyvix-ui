@@ -14,7 +14,7 @@ const defaultElement = {type: "!/", placeholder: ["!/"], id: "!/",   className: 
 const supportedTypes = ["text", "select", "email", "password", "search", "url", "tel"]
 const componentsMap = {"SelectEngine": SelectEngine};
 
-function Modal({title, type, elements, theme = "Singularity", animation = "fade", Id, Class, onSubmit})
+function Modal({title, type, elements, theme = "Singularity", animation = "!/", Id, Class, onSubmit})
 {
   const [data, SetData] = React.useState({});
   const fields = SerializeData(title, type, elements, theme, animation, Id, Class, onSubmit); 
@@ -30,14 +30,17 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
     return null;
   }
 
-  const currentTheme = themesData.find(e => e.theme === theme);
-  const currentAnimation = animationsData.find(e => e.animation === animation);
+  const currentTheme = themesData.find(e => e.theme.trim().toLowerCase() === theme.trim().toLowerCase());    
+  const animationQuery = animation === "!/" ? currentTheme["default-animation"] : animation;
+  const currentAnimation = animationsData.find(e => e.animation.trim().toLowerCase() === animationQuery.trim().toLowerCase());
   const serilaizedClass = Class + ` ${currentTheme.class}`;
   const rowOffset = elements.length / 4;
   const dynamicHeight = rowOffset > 1 ? `${30 + (rowOffset - 1) * 15}rem` : "30rem";
   const dynamicWidth = currentTheme.radiused || rowOffset > 1  ? `${30 + rowOffset * 10}rem` : "30rem";
 
   useGSAP(()=> {
+    if (!modalRef.current || !currentAnimation) return;
+
     gsap.fromTo(modalRef.current, currentAnimation.from, {
       ...currentAnimation.to,
       duration: currentAnimation["default-duration"],
@@ -89,6 +92,7 @@ function Modal({title, type, elements, theme = "Singularity", animation = "fade"
                     ...(elementDef["supports_type"] && ({type: field.type})),
                     ...(elementDef["supports_autocomplete"] && ({autoComplete: field.type === "password" ? "current-password": "on"}))
                   }
+                  
                   return <Tag key={j} {...Tagprobs} onChange={(e) => handleInputChange(name, e.target.value)} />
               })
               }
@@ -132,7 +136,7 @@ function ValidateInput(title, type, elements, theme, animation, Id, Class, onSub
   {
     return {status: -1, error: "Element should be provided as an array of objects."};
   }
-  if(!validAnimations.includes(animation))
+  if(animation !== "!/" && !validAnimations.includes(animation) )
   {
     return {status: -1, error: "Please provide a vaild animation."};
   }
@@ -183,7 +187,7 @@ function validateElements(elements)
       }
     }
   };
-  console.log(elements);
+
   const isDuplicateName = checkDuplicates(elements, "name");
   const isDuplicateId = checkDuplicates(elements, "id");
 
