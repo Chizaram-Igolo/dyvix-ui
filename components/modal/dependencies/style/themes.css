@@ -74,7 +74,7 @@
     box-shadow: -6px 2px 51px -7px rgba(213,255,248,1) inset;
     -webkit-box-shadow: -6px 2px 51px -7px rgba(213,255,248,1) inset;
     -moz-box-shadow: -6px 2px 51px -7px rgba(213,255,248,1) inset;
-    transition: trasform 0.5s ease-in-out, 0.4s ease-in-out, box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out, -moz-box-shadow 0.3s ease-in-out, border 0.2s ease-in-out;
+    transition: transform 0.5s ease-in-out,  box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out, -moz-box-shadow 0.3s ease-in-out, border 0.2s ease-in-out;
 
 }
 .dyvix-modal-frost:hover
