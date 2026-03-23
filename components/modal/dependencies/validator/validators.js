@@ -21,7 +21,7 @@ export const validatePasswd = (value, {minLength = 8, maxLength = 100, specialCh
     pattern += capital ? `(?=.*[a-z])(?=.*[A-Z])` : `(?=.*[a-z])`;
     
     if(numbers) pattern += `(?=.*\\d)`;
-    if(specialCharacters) pattern += `(?=.*[!@#$%^&*()_\-+=\[\]{};:'",.<>?/\\|~])`;
+    if(specialCharacters) pattern += `(?=.*[!@#$%^&*()_\\-+=\\[\\]{};:'",.])`;
     
     pattern += `.{${minLength},${maxLength}}$`
 

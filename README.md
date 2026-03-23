@@ -28,14 +28,14 @@ function ModalExample()
         <Modal
           title="Register"
           type="form"
-          animation="bubble"
+          animation="bubble" // bubble | fade | zoom | unfold | glitch
           Id="register-modal"
           Class="modal"
-          theme='Singularity' // Or Industrial
+          theme='Singularity' // Singularity | Industrial | Ember | Frost | Blade
           elements={[
             { type: "text", placeholder: ["First Name", "Last Name"], id: "name", name: ["firstName", "lastName"], className: "ex-text", amount: 2 },
-            { type: "email", placeholder: "Email", id: "email", name: "email", className: "ex-text", amount: 1 },
-            { type: "password", placeholder: "Password", id: "password", name: "password", className: "ex-text", amount: 1 },
+            { type: "email", placeholder: "Email", validation: ["email"], id: "email", name: "email", className: "ex-text", amount: 1 },
+            { type: "password", placeholder: "Password", validation: ["password"], id: "password", name: "password", className: "ex-text", amount: 1 },
           ]}
           onSubmit={(data) => console.log(data)}
         />
