@@ -1,11 +1,19 @@
+.dyvix-modal-wrapper
+{
+    margin-top:auto;
+    width: fit-content;
+    display: flex;    
+    margin: 7rem auto;
+    justify-self: center;
+}
+
 .modal
 {
     display: flex;
     flex-direction: column;
-    margin: 11rem auto;
     width: 30rem;
     height: 30rem;
-    overflow: hidden;
+    position: relative;
 }
 #modal-header
 {
