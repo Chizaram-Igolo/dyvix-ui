@@ -10,5 +10,11 @@
         "class": "dyvix-modal-industrial",
         "default-amination": "fade",
         "radiused": false
+    },
+    {
+        "theme": "Ember",
+        "class": "dyvix-modal-ember",
+        "default-amination": "fade",
+        "radiused": false
     }
 ]
