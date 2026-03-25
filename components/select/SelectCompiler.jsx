@@ -1,7 +1,10 @@
 import React from 'react';
 import SelectEngine from './SelectEngine';
 import './dependencies/style/styles.css';
-function DynamicSelect({ elements = [], onChangeCallback }) {
+
+const supportedTypes = ["select", "autocomplete"];
+
+function DynamicSelect({ elements = [], onChangeCallback, type="select", ...props }) {
   const [Select, SetSelect] = React.useState({
     is_rendered: true,
     is_open: false,
@@ -10,9 +13,28 @@ function DynamicSelect({ elements = [], onChangeCallback }) {
   });
   const selectRef = React.useRef(null);
   const dropdownSelectRef = React.useRef(null);
+  const is_valid = ValidateInput(type);
+
+  if (is_valid.status === -1) {
+    return null;
+  }
 
   function onChangeInternalCallback(data) {
     onChangeCallback(data);
+  }
+
+  function TranslateEngineType(value, handler, controller)
+  {
+    if(type === "select")
+    {
+      if(handler !== "focus" && handler !== "blur") return;
+      
+      controller((prevData) => ({
+        ...prevData,
+        is_open: handler === "focus",
+        elements: elements
+      }));
+    }
   }
 
   const PopulateSelect = (value, controller, elementArray) => {
@@ -21,7 +43,7 @@ function DynamicSelect({ elements = [], onChangeCallback }) {
     if (!value) {
       controller((prevData) => ({
         ...prevData,
-        is_open: false
+        is_open: false,
       }));
       return;
     }
@@ -51,7 +73,7 @@ function DynamicSelect({ elements = [], onChangeCallback }) {
   };
 
   return (
-    <div id="dyvix-select-warper">
+    <div className="dyvix-select-warper" style={props}>
       <input
         className="dyvi-select"
         type="text"
@@ -60,6 +82,13 @@ function DynamicSelect({ elements = [], onChangeCallback }) {
           PopulateSelect(e.target.value, SetSelect, elements);
           onChangeInternalCallback(e.target.value);
         }}
+        onFocus={(e) => {
+          TranslateEngineType(e.target.value, "focus", SetSelect);
+        }}
+        onBlur={(e) => {
+          TranslateEngineType(e.target.value, "blur", SetSelect);
+        }}
+        type={type}
       />
       <SelectEngine
         elements={Select.elements}
@@ -72,6 +101,16 @@ function DynamicSelect({ elements = [], onChangeCallback }) {
       />
     </div>
   );
+}
+
+function ValidateInput(type)
+{
+  if(!supportedTypes.includes(type))
+  {
+    return { status: -1, error: 'Elements should include a valid type.' };
+  }
+
+  return { status: 1 };
 }
 
 export default DynamicSelect;
