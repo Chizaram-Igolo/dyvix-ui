@@ -60,16 +60,17 @@
   flex: 0;
   min-width: 10rem;
   min-height: 2.8rem;
-  transition: transform 0.3s ease-in-out, background-color 0.2s ease-in-out, border 0.1s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.2s ease-in-out,
+    border 0.1s ease-in-out;
 }
-.modal-btn:hover 
-{
+.modal-btn:hover {
   transform: scale(1.03);
   background-color: aquamarine;
   border: 2px solid rgb(68, 85, 91);
 }
-.modal-btn:active
-{
+.modal-btn:active {
   background-color: #0ea5e9;
   transform: scale(1.05);
 }

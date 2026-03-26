@@ -4,10 +4,9 @@ export default function ExecuteValidator(value, validators) {
     const param = optionParam ? JSON.parse(optionParam.replace(')', '')) : null;
     const func = VALIDATORS_REGISTERY[funcName];
     let result = null;
-    if (func) 
-    {
+    if (func) {
       result = func(value, ...[param].filter(Boolean));
-    }  
+    }
 
     if (!result.status) return result;
   }
@@ -50,6 +49,5 @@ const VALIDATORS_REGISTERY = {
   isURL: (value) => ({
     status: /^(https?:\/\/)?([\w\d\-_]+\.)+[\w\d\-_]+(\/.*)?$/.test(value),
     error: 'Please enter a valid URL (e.g., https://example.com).'
-  }),
-
+  })
 };

@@ -39,7 +39,8 @@ function Modal({
   animation = '!/',
   Id,
   Class,
-  onSubmit
+  onSubmit,
+  onChange
 }) {
   const [data, SetData] = React.useState({});
   const fields = SerializeData(
@@ -55,7 +56,9 @@ function Modal({
   const modalRef = React.useRef(null);
 
   function handleInputChange(name, value) {
-    SetData((prev) => ({ ...prev, [name]: value }));
+    const nextData = { ...data, [name]: value };
+    SetData(nextData);
+    onChange(nextData);
   }
   function handleValidation() {
     for (const field of fields) {
