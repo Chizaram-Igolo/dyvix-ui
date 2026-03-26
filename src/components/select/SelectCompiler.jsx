@@ -5,6 +5,7 @@ import animationsData from '../animations.json';
 import { useGSAP } from '@gsap/react';
 
 const supportedTypes = ['select', 'autocomplete'];
+const validAnimations = animationsData.map((e) => e.animation);
 
 function DynamicSelect({
   elements = [],
@@ -21,9 +22,10 @@ function DynamicSelect({
   });
   const selectRef = React.useRef(null);
   const dropdownSelectRef = React.useRef(null);
-  const is_valid = ValidateInput(type);
+  const is_valid = ValidateInput(elements, type, animation);
 
   if (is_valid.status === -1) {
+    console.error(is_valid.error);
     return null;
   }
 
@@ -122,11 +124,18 @@ function DynamicSelect({
   );
 }
 
-function ValidateInput(type) {
-  if (!supportedTypes.includes(type)) {
-    return { status: -1, error: 'Elements should include a valid type.' };
-  }
+function ValidateInput(elements, type, animation) {
+  if(!Array.isArray(elements))
+  {
+    return { status: -1, error: 'Elements should be included as an array.' };
 
+  }
+  if (!supportedTypes.includes(type)) {
+    return { status: -1, error: 'Please provide a vaild select type.' };
+  }
+  if (animation !== '!/' && !validAnimations.includes(animation)) {
+    return { status: -1, error: 'Please provide a vaild animation.' };
+  }
   return { status: 1 };
 }
 
