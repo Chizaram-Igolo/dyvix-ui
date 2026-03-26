@@ -32,7 +32,7 @@
   {
     "theme": "Neon",
     "class": "dyvix-modal-neon",
-    "default-animation": "zoom",
+    "default-animation": "pulse",
     "radiused": false
   }
 ]

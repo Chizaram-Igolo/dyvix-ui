@@ -43,5 +43,14 @@
     "components": ["modal"],
     "from": { "x": -60, "skewX": 40, "opacity": 0 },
     "to": { "x": 0, "skewX": 0, "opacity": 1 }
+  },
+  {
+    "animation": "pulse",
+    "type": "in",
+    "default-duration": 0.8,
+    "ease": "elastic.out(0.6, 0.4)",
+    "components": ["modal"],
+    "from": { "scale": 0.8, "opacity": 0, "filter": "blur(50px)"},
+    "to": { "scale": 1, "opacity": 1, "filter": "blur(0px)" }
   }
 ]
