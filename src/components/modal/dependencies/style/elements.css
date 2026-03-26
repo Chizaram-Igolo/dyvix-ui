@@ -68,3 +68,8 @@
   background-color: aquamarine;
   border: 2px solid rgb(68, 85, 91);
 }
+.modal-btn:active
+{
+  background-color: #0ea5e9;
+  transform: scale(1.05);
+}
