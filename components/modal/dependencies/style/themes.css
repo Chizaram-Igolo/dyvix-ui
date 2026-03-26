@@ -125,3 +125,18 @@
   -webkit-box-shadow: -6px -6px 30px rgba(255, 255, 255, 0.1);
   -moz-box-shadow: -6px -6px 30px rgba(255, 255, 255, 0.1);
 }
+.dyvix-modal-neon
+{
+  background: #4DEEEA;
+  background: radial-gradient(circle, rgba(77, 238, 234, 1) 0%, rgba(112, 186, 239, 1) 43%, rgba(240, 0, 255, 1) 100%);
+  -webkit-box-shadow:0px 0px 64px 0px rgba(252,46,255,1);
+  -moz-box-shadow: 0px 0px 64px 0px rgba(252,46,255,1);
+  box-shadow: 0px 0px 64px 0px rgba(252,46,255,1);
+  border-radius: 4rem;
+  transition: border-radius 0.2s ease-in-out, transform 0.3s ease-in-out;
+}
+.dyvix-modal-neon:hover
+{
+  border-radius: 2rem;
+  transform: scale(1.01);
+}

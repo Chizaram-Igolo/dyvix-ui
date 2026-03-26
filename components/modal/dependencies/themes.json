@@ -28,5 +28,11 @@
     "class": "dyvix-modal-blade",
     "default-animation": "zoom",
     "radiused": false
+  },
+  {
+    "theme": "Neon",
+    "class": "dyvix-modal-neon",
+    "default-animation": "zoom",
+    "radiused": false
   }
 ]
