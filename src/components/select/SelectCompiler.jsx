@@ -57,7 +57,7 @@ function DynamicSelect({
     }
 
     const result = elementArray.filter((element) => {
-      const items = element.trim().toLowerCase();
+      const items = String(element).trim().toLowerCase();
       const query = value.trim().toLowerCase();
 
       return items.startsWith(query);
