@@ -1,16 +1,16 @@
 export default function ExecuteValidator(value, validators) {
   for (const validator of validators) {
     const [funcName, optionParam] = validator.split('(');
-    const param = optionParam ? optionParam.replace(')', '') : null;
+    const param = optionParam ? JSON.parse(optionParam.replace(')', '')) : null;
     const func = VALIDATORS_REGISTERY[funcName];
     let result = null;
-
-    if (func) {
+    if (func) 
+    {
       result = func(value, ...[param].filter(Boolean));
-    }
+    }  
+
     if (!result.status) return result;
   }
-
   return { status: true, error: null };
 }
 
@@ -42,5 +42,14 @@ const VALIDATORS_REGISTERY = {
       status: new RegExp(pattern).test(value),
       error: 'Invalid password'
     };
-  }
+  },
+  isNumeric: (value, options = {}) => ({
+    status: /^\d+$/.test(value),
+    error: 'Please enter numbers only.'
+  }),
+  isURL: (value) => ({
+    status: /^(https?:\/\/)?([\w\d\-_]+\.)+[\w\d\-_]+(\/.*)?$/.test(value),
+    error: 'Please enter a valid URL (e.g., https://example.com).'
+  }),
+
 };

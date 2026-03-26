@@ -6,5 +6,13 @@
   {
     "preset": "password",
     "validators": ["validatePasswd"]
+  },
+  {
+    "preset": "number",
+    "validators": ["isNumeric"]
+  },
+  {
+    "preset": "url",
+    "validators": ["isURL"]
   }
 ]
