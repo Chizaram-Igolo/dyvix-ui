@@ -48,6 +48,8 @@ function ModalExample()
 }
 ````
 
+Full Documentation & Live Demos: [dyvix-ui.vercel.app](https://dyvix-ui.vercel.app/)
+
 ## Contributing
 
 Feel free to open meaningful issues and prs. Check our open contribution trackers:
