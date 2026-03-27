@@ -3,6 +3,7 @@ import React from 'react';
 import SelectEngine from './SelectEngine';
 import animationsData from '../animations.json';
 import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
 
 const supportedTypes = ['select', 'autocomplete'];
 const validAnimations = animationsData.map((e) => e.animation);
